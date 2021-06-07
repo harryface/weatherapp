@@ -40,6 +40,11 @@ class GetWeatherInfoView(View):
         
         if latitude and longitude:
             context = get_weather_info(latitude, longitude)
+            if not context:
+                messages.add_message(self.request, messages.ERROR,
+                    'Your latitude and longitude is out of range'
+                )
+                return redirect('home')
         else:
             messages.add_message(self.request, messages.ERROR,
                     'Please input your latitude and longitude'
