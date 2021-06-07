@@ -1,8 +1,13 @@
 import requests, json
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import render, redirect
 from django.views import View
+from django.views.generic import TemplateView
 
-# Create your views here.
+
+class HomePageView(TemplateView):
+    template_name = "home.html"
+
 
 def get_weather_info(latitude, longitude):
     dict = {}
@@ -25,3 +30,19 @@ def get_weather_info(latitude, longitude):
     except Exception as e:
         return None
     
+
+class GetWeatherInfoView(View):
+    # Since there is no access to the database, its best to use Get instead of Post
+    def get(self, request):
+        template = "weather.html"
+        latitude = request.GET.get('latitude', None)
+        longitude = request.GET.get('longitude', None)
+        
+        if latitude and longitude:
+            context = get_weather_info(latitude, longitude)
+        else:
+            messages.add_message(self.request, messages.ERROR,
+                    'Please input your latitude and longitude'
+        )
+            return redirect('home')
+        return render(request, template, context)

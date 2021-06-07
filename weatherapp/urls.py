@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from main.views import GetWeatherInfoView, HomePageView
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', HomePageView.as_view(), name='home'),
+    path('weather/', GetWeatherInfoView.as_view(), name='weather'),
 ]

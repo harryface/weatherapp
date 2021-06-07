@@ -1,0 +1,20 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+<div class="row">
+    <ul class="list-group">
+        <li class="list-group-item">Time - {{time|truncatechars:11}}</li>
+        <li class="list-group-item">Air Pressure At Sea Level (hPa) - {{pres}}</li>
+        <li class="list-group-item">Air Temperature (celsius) - {{temp}}</li>
+        <li class="list-group-item">Cloud Area Fraction (%) - {{cloud}}</li>
+        <li class="list-group-item">Relative Humidity (mm) - {{hum}}</li>
+        <li class="list-group-item">Wind From Direction (degrees) - {{wind_d}}</li>
+        <li class="list-group-item">Wind Speed (m/s)- {{wind_sp}}</li>
+        <li class="list-group-item">Next Hour Prediction - {{next_1}}</li>
+        <li class="list-group-item">Next 6 Hours Prediction - {{next_6}}</li>
+        <li class="list-group-item">Next 12 Hours Prediction - {{next_12}}</li>
+    </ul>
+</div>
+
+{% endblock %}
